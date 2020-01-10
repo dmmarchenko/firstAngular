@@ -7,15 +7,5 @@ import {Routes} from '../shared/routes.model';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-    @Output()
-    pageChanged = new EventEmitter<string>();
-
-    goToRecipes() {
-        this.pageChanged.emit(Routes.RECIPES);
-    }
-
-    goToShoppingList() {
-        this.pageChanged.emit(Routes.SHOPPING_LIST);
-    }
 }
 
