@@ -16,6 +16,7 @@ import { RecipePlaceholderComponent } from './recipes/recipe-placeholder/recipe-
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingEditComponent,
     DropdownDirective,
     RecipePlaceholderComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
