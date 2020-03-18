@@ -37,7 +37,7 @@ export class ShoppingListService {
   }
 
   removeItem(editedItemIndex: number) {
-    this.items = this.items.splice(editedItemIndex, 1);
+    this.items.splice(editedItemIndex, 1);
     this.itemsChanged.next(this.items.slice());
   }
 }
