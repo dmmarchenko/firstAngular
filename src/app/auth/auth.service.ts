@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -44,7 +45,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp' +
-      '?key=AIzaSyDR02JkR5XEpTnemzBRV0Oggf76PQ4SmLA',
+      `?key=${environment.firebaseAPIKey}`,
       {
         email,
         password,
@@ -58,7 +59,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword' +
-      '?key=AIzaSyDR02JkR5XEpTnemzBRV0Oggf76PQ4SmLA',
+      `?key=${environment.firebaseAPIKey}`,
       {
         email,
         password,
