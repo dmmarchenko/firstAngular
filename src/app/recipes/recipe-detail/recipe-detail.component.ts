@@ -5,7 +5,7 @@ import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Store } from '@ngrx/store';
 import { AddIngredients } from '../../shopping-list/store/shopping-list.actions';
-import { AppState } from '../../shopping-list/store/shopping-list.reducer';
+import { AppState } from '../../store/app.reducer';
 
 @Component({
   selector: 'app-recipe-detail',
