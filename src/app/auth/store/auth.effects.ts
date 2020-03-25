@@ -57,7 +57,12 @@ export class AuthEffects {
   @Effect({dispatch: false})
   authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap(() => this.router.navigate(['/']))
+    tap((action: AuthActions.AuthenticateSuccess) => {
+      if (action.redirect) {
+        console.log(`Redirecting to /`);
+        this.router.navigate(['/']);
+      }
+    })
   );
 
   @Effect({dispatch: false})
@@ -90,7 +95,7 @@ export class AuthEffects {
         const expirationDuration = new Date(userData.tokenExpirationDate).getTime() -
           new Date().getTime();
         this.authService.setLogoutTimer(expirationDuration);
-        return new AuthenticateSuccess(loadedUser);
+        return new AuthenticateSuccess(loadedUser, false);
       }
       return {type: 'NOOP_ACTION'};
     })
@@ -108,7 +113,7 @@ export class AuthEffects {
     const expirationDate = new Date(new Date().getTime() + +responseData.expiresIn * 1000);
     const user = new User(responseData.email, responseData.localId, responseData.idToken, expirationDate);
     localStorage.setItem('userData', JSON.stringify(user));
-    return new AuthActions.AuthenticateSuccess(user);
+    return new AuthActions.AuthenticateSuccess(user, true);
   }
 
   private static parseErrorMessage(errorResponse) {
