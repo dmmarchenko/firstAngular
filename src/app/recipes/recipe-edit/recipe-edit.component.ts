@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RecipeService } from '../recipe.service';
 import { AppState } from '../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
@@ -22,7 +21,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private storeSub: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService,
               private router: Router,
               private store: Store<AppState>) {
   }
@@ -51,8 +49,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      //const recipe = this.recipeService.getRecipeById(this.id);
-
       this.storeSub = this.store.select('recipe').pipe(
         map(recipeState => {
           return recipeState.recipes.find((recipe, index) => index === this.id);
